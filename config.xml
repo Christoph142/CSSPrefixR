@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" id="http://www.codog.de/CSSPrefixR" viewmodes="minimized" version="2.1">
+
+  <name>CSS PrefixR</name>
+  <author>Christoph142</author>
+  <description xml:lang="en">Makes CSS-elements, which were only coded for Firefox or Chrome work in Opera as well</description>
+  <description xml:lang="de">Macht CSS-Elemente, die nur für Firefox oder Chrome erstellt wurden auch in Opera funktionsfähig</description>
+  <icon src="images/icon.png"/>
+  
+</widget>

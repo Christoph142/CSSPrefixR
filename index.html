@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+	
+<head>
+    <script type="text/javascript">
+    function update_supported_properties(){	
+        var possible_properties = ['BorderImage', 'boxShadow', 'Transform', 'Animation', 'Transition'];
+        var equivalents = new Array('border-image IS HANDLED SEPARATELY', 'box-shadow', 'transform', 'animation', 'transition');
+        var supported_ones = ""; //list of properties, which are supported without prefix
+        
+        for (var i=0; i<possible_properties.length; i++){
+            if (typeof document.documentElement.style[possible_properties[i]]=="string"){
+                //if the property value is a string (versus undefined) and thus is supported, don't add it
+                if(i==0) supported_ones = "border";
+                else supported_ones = supported_ones + "|" + equivalents[i];
+            }
+            else{
+                if(i==0) supported_ones = "border[^-image]";
+            }
+        }
+        widget.preferences.prefixfree = "-(moz|ms|webkit|khtml|o)-(" + supported_ones + ")";
+    }
+    
+    window.addEventListener("load", function(){
+
+        if( window.opera.buildNumber() != widget.preferences.lastbuild ){
+            update_supported_properties();
+            widget.preferences.lastbuild = window.opera.buildNumber();
+        }
+		
+    	if(widget.preferences.hide_toolbar_button!="true"){
+			var ToolbarUIItemProperties = {
+				title: widget.name,
+				icon: "images/button.png",
+				popup: { href:"popup.html", width:250, height:157 },
+			};
+			var theButton = opera.contexts.toolbar.createItem(ToolbarUIItemProperties);
+			opera.contexts.toolbar.addItem(theButton);
+		}
+		
+    }, false);
+	
+	opera.extension.onconnect = function(event){ opera.extension.broadcastMessage("r u the popup?"); }
+	opera.extension.onmessage = function(event){
+		if(event.data=="yes, what's the current url?"){
+			popup = event.source;
+			popup.postMessage(opera.extension.tabs.getFocused().url);
+		}
+	}
+    </script>
+</head>
+
+<body><!-- IGNORED --></body>
+</html>

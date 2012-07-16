@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<META HTTP-EQUIV="content-type" CONTENT="text/html; charset=utf-8">
+<html>
+<head>
+	<title>CSS PrefixR Options</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="languages/options.js"></script>
+    <script type="text/javascript">
+		function getprefs(){
+			if(widget.preferences.lang!=undefined && widget.preferences.lang!="auto")
+				document.getElementById('current_lang').src = "images/"+widget.preferences.lang+".jpg";
+				
+			if(widget.preferences.enabled_by_default == 2){ 
+				document.getElementById('enabled_0').checked = true;
+				document.getElementById('div_excludes').className = 'invis';
+				document.getElementById('div_includes').className = 'vis';
+			}
+			
+			if(widget.preferences.excludes!=undefined)
+				document.getElementById('excludes').value = widget.preferences.excludes;
+			if(widget.preferences.includes!=undefined)
+				document.getElementById('includes').value = widget.preferences.includes;
+			
+			if(widget.preferences.hide_toolbar_button=="true")
+				document.getElementById('hide_toolbar_button').checked = true;
+		}
+	</script>
+</head>
+
+<body onLoad="adjustlanguage(); getprefs();">
+
+<div id="lang_container">
+    <div id="lang" class="done" onClick="if(this.className=='done') this.className='choose'; else this.className='done';">
+        <img id="current_lang" src="images/auto.jpg" title="change to another language">
+        <br>
+        <img src="images/curly_braces.png" style="box-shadow:none; -o-transform:none; cursor:default;">
+        <br>
+        <img src="images/auto.jpg" title="auto-detect" onClick="change_lang('auto');"><br>
+        <img src="images/en.jpg" title="english" onClick="change_lang('en');"><br>
+        <img src="images/de.jpg" title="deutsch" onClick="change_lang('de');"><br>
+        <img src="images/fr.jpg" title="français" onClick="change_lang('fr');"><br>
+        <img src="images/nb.jpg" title="norsk" onClick="change_lang('nb');"><br>
+        <img src="images/pl.jpg" title="polski" onClick="change_lang('pl');"><br>
+        <img src="images/ru.jpg" title="русский" onClick="change_lang('ru');"><br>
+        <img src="images/ar.jpg" title="عربي" onClick="change_lang('ar');">
+    </div>
+</div>
+
+<header>
+	<img src="images/icon.png">
+    <h1 id="widget-name">CSS PrefixR 2.0</h1>
+    <h3>Made by <a href="http://my.opera.com/christoph142/blog/" target="_blank" style="background-color:transparent;">Christoph142</a></h3>
+</header>
+
+<section>
+    <h3>#Options#</h3>
+    <fieldset>
+    <p>#by default#<br></p>
+    <p>   
+        <input id="enabled_1" type="radio" name="enabled_by_default" value="1" checked onClick="widget.preferences.enabled_by_default = 1; document.getElementById('div_excludes').className = 'vis'; document.getElementById('div_includes').className = 'invis';">
+        <label for="enabled_1">#enabled#</label><br>
+        <input id="enabled_0" type="radio" name="enabled_by_default" value="2" onClick="widget.preferences.enabled_by_default = 2; document.getElementById('div_excludes').className = 'invis'; document.getElementById('div_includes').className = 'vis';">
+        <label for="enabled_0">#disabled#</label><br>
+    </p>
+    <p>
+        <div id="div_excludes" class="vis">
+            #exclude#:<br>
+            <textarea id="excludes" style="width:90%; height:200px;" onChange="widget.preferences.excludes = this.value;">
+            </textarea><br>
+            <i>#1address#</i>
+        </div>
+        <div id="div_includes" class="invis">
+            #include#:<br>
+            <textarea id="includes" style="width:90%; height:200px;" onChange="widget.preferences.includes = this.value;">
+            </textarea><br>
+            <i>#1address#</i>
+        </div>
+    </p>
+    </fieldset>
+    <br><fieldset>
+    <input type="checkbox" id="hide_toolbar_button" onClick="widget.preferences.hide_toolbar_button=this.checked;">
+    <label for="hide_toolbar_button">#hide_button#</label>
+    </fieldset>
+</section>
+
+<footer>
+    <p>#footer# :)</p>
+</footer>
+  
+</body>
+</html>
